@@ -1,83 +1,185 @@
 import { useState } from "react";
-import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { loginUser } from "../api";
 
 function Login() {
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
     email: "",
-    password: ""
+    password: "",
   });
 
-  const [message, setMessage] = useState("");
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const handleChange = (e) => {
     setFormData({
       ...formData,
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.value,
     });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    setError("");
+
+    if (!formData.email || !formData.password) {
+      setError("Please enter email and password.");
+      return;
+    }
+
     try {
-      const response = await axios.post(
-        "http://localhost:5000/api/auth/login",
-        formData
-      );
+      setLoading(true);
 
-      // Save JWT token in browser
-      localStorage.setItem("token", response.data.token);
+      const response = await loginUser(formData);
+      const data = response.data;
 
-      // Save logged-in user details
-      localStorage.setItem(
-        "user",
-        JSON.stringify(response.data.user)
-      );
+      localStorage.setItem("token", data.token);
 
-      setMessage("Login successful!");
+      if (data.user) {
+        localStorage.setItem("user", JSON.stringify(data.user));
+      }
 
-      // Go to home page
       navigate("/dashboard");
-    } catch (error) {
-      setMessage(
-        error.response?.data?.message ||
-        "Login failed"
+    } catch (err) {
+      setError(
+        err.response?.data?.message ||
+        "Unable to log in. Please try again."
       );
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
-    <div>
-      <h2>Login to PeerLink</h2>
+    <div className="auth-page">
 
-      <form onSubmit={handleSubmit}>
-        <input
-          type="email"
-          name="email"
-          placeholder="Email"
-          value={formData.email}
-          onChange={handleChange}
-          required
-        />
+      {/* LEFT SIDE */}
+      <div className="auth-brand">
 
-        <input
-          type="password"
-          name="password"
-          placeholder="Password"
-          value={formData.password}
-          onChange={handleChange}
-          required
-        />
+        <Link to="/" className="auth-logo">
+          <span>♣</span> PeerLink
+        </Link>
 
-        <button type="submit">
-          Login
-        </button>
-      </form>
+        <div className="auth-illustration">
+          <div className="auth-orbit orbit-one"></div>
+          <div className="auth-orbit orbit-two"></div>
 
-      {message && <p>{message}</p>}
+          <div className="auth-person person-one">👩🏻‍💻</div>
+          <div className="auth-person person-two">👨🏻‍💻</div>
+
+          <div className="auth-graduation">🎓</div>
+        </div>
+
+        <div className="auth-brand-text">
+          <h2>Learn. Teach. Grow Together.</h2>
+
+          <p>
+            Join a community of learners and mentors.
+            Share your skills, learn new ones, and grow together.
+          </p>
+        </div>
+
+      </div>
+
+      {/* RIGHT SIDE */}
+      <div className="auth-form-section">
+
+        <div className="auth-form-container">
+
+          <Link to="/" className="mobile-back">
+            ← Back to PeerLink
+          </Link>
+
+          <div className="auth-heading">
+            <span className="auth-small-title">WELCOME BACK</span>
+
+            <h1>Welcome Back!</h1>
+
+            <p>
+              Log in to continue your learning journey.
+            </p>
+          </div>
+
+          <form onSubmit={handleSubmit}>
+
+            {error && (
+              <div className="form-error">
+                {error}
+              </div>
+            )}
+
+            <div className="form-group">
+              <label>Email address</label>
+
+              <input
+                type="email"
+                name="email"
+                placeholder="Enter your email"
+                value={formData.email}
+                onChange={handleChange}
+              />
+            </div>
+
+            <div className="form-group">
+              <div className="password-label">
+                <label>Password</label>
+                <button type="button">
+                  Forgot password?
+                </button>
+              </div>
+
+              <input
+                type="password"
+                name="password"
+                placeholder="Enter your password"
+                value={formData.password}
+                onChange={handleChange}
+              />
+            </div>
+
+            <label className="remember">
+              <input type="checkbox" />
+              <span>Remember me</span>
+            </label>
+
+            <button
+              type="submit"
+              className="auth-submit"
+              disabled={loading}
+            >
+              {loading ? "Logging in..." : "Login"}
+            </button>
+
+          </form>
+
+          <div className="auth-divider">
+            <span>or continue with</span>
+          </div>
+
+          <div className="social-buttons">
+            <button type="button">
+              <span>G</span>
+              Google
+            </button>
+
+            <button type="button">
+              <span>◉</span>
+              GitHub
+            </button>
+          </div>
+
+          <p className="auth-bottom-text">
+            Don't have an account?
+            <Link to="/register"> Sign Up</Link>
+          </p>
+
+        </div>
+
+      </div>
+
     </div>
   );
 }

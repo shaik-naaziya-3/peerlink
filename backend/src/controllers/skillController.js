@@ -1,3 +1,4 @@
+const mongoose = require("mongoose");
 const Skill = require("../models/Skill");
 
 // CREATE a skill
@@ -8,6 +9,12 @@ const createSkill = async (req, res) => {
     if (!title || !description || !category) {
       return res.status(400).json({
         message: "Title, description and category are required"
+      });
+    }
+
+    if (req.user.role !== "mentor") {
+      return res.status(403).json({
+        message: "Only mentors can create skills"
       });
     }
 
@@ -56,6 +63,12 @@ const getSkills = async (req, res) => {
 // READ one skill
 const getSkillById = async (req, res) => {
   try {
+    if (!mongoose.isValidObjectId(req.params.id)) {
+      return res.status(400).json({
+        message: "Invalid skill ID"
+      });
+    }
+
     const skill = await Skill.findById(req.params.id)
       .populate("mentor", "name email");
 
@@ -82,6 +95,12 @@ const getSkillById = async (req, res) => {
 // UPDATE a skill
 const updateSkill = async (req, res) => {
   try {
+    if (!mongoose.isValidObjectId(req.params.id)) {
+      return res.status(400).json({
+        message: "Invalid skill ID"
+      });
+    }
+
     const { title, description, category } = req.body;
 
     const skill = await Skill.findById(req.params.id);
@@ -123,6 +142,12 @@ const updateSkill = async (req, res) => {
 // DELETE a skill
 const deleteSkill = async (req, res) => {
   try {
+    if (!mongoose.isValidObjectId(req.params.id)) {
+      return res.status(400).json({
+        message: "Invalid skill ID"
+      });
+    }
+
     const skill = await Skill.findById(req.params.id);
 
     if (!skill) {
