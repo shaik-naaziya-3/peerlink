@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { Heart, Lightbulb, Search, Sparkles, UserRound } from "lucide-react";
 import Layout from "../components/Layout";
 import api, { getStoredUser } from "../api";
 
@@ -48,11 +49,11 @@ function Dashboard() {
       {message && <p className="dashboard-message">{message}</p>}
 
       <div className="stats-grid">
-        <StatCard label="Skills Available" value={skills.length} icon="♡" />
+        <StatCard label="Skills Available" value={skills.length} icon={<Heart size={20} strokeWidth={1.8} />} />
         {isMentor && (
-          <StatCard label="Your Skills" value={ownSkills.length} icon="✦" />
+          <StatCard label="Your Skills" value={ownSkills.length} icon={<Sparkles size={20} strokeWidth={1.8} />} />
         )}
-        <StatCard label="Your Role" value={isMentor ? "Mentor" : "Student"} icon="◎" />
+        <StatCard label="Your Role" value={isMentor ? "Mentor" : "Student"} icon={<UserRound size={20} strokeWidth={1.8} />} />
       </div>
 
       <div className="section-heading">
@@ -75,7 +76,7 @@ function Dashboard() {
 
       <div className="quick-section">
         <div className="quick-card">
-          <div className="quick-card-icon">⌕</div>
+          <div className="quick-card-icon"><Search size={22} strokeWidth={1.8} /></div>
           <div>
             <h3>Find something new to learn</h3>
             <p>Browse skills shared by other students.</p>
@@ -85,7 +86,7 @@ function Dashboard() {
 
         {isMentor && (
           <div className="quick-card">
-            <div className="quick-card-icon">✦</div>
+            <div className="quick-card-icon"><Lightbulb size={22} strokeWidth={1.8} /></div>
             <div>
               <h3>Share your knowledge</h3>
               <p>Add a skill and help another student.</p>
@@ -114,7 +115,7 @@ function SkillCard({ skill }) {
   return (
     <div className="skill-card">
       <div className="skill-card-top">
-        <div className="skill-icon">✦</div>
+        <div className="skill-icon"><Sparkles size={22} strokeWidth={1.8} /></div>
         <span className="skill-rating">{skill.category}</span>
       </div>
       <h3>{skill.title}</h3>

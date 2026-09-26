@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { Link2 } from "lucide-react";
 import { registerUser } from "../api";
 
 function Register() {
@@ -65,7 +66,8 @@ function Register() {
       <div className="auth-brand">
 
         <Link to="/" className="auth-logo">
-          <span>♣</span> PeerLink
+          <Link2 size={22} strokeWidth={1.8} />
+          PeerLink
         </Link>
 
         <div className="auth-illustration">

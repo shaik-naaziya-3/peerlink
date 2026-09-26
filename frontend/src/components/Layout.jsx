@@ -1,4 +1,18 @@
 import { Link, useNavigate } from "react-router-dom";
+import {
+  Bell,
+  BookOpen,
+  CalendarDays,
+  Heart,
+  LayoutDashboard,
+  Link2,
+  LogOut,
+  Mail,
+  MessageCircle,
+  Search,
+  Settings,
+  UserRound,
+} from "lucide-react";
 import { getStoredUser } from "../api";
 
 function Layout({ children }) {
@@ -21,7 +35,9 @@ function Layout({ children }) {
       <aside className="sidebar">
 
         <Link to="/" className="sidebar-brand">
-          <div className="sidebar-brand-icon">♣</div>
+          <div className="sidebar-brand-icon">
+            <Link2 size={20} strokeWidth={1.8} />
+          </div>
           <div>
             <strong>PeerLink</strong>
             <span>Learn • Teach • Grow</span>
@@ -46,17 +62,17 @@ function Layout({ children }) {
         <nav className="sidebar-nav">
 
           <Link to="/dashboard" className="sidebar-link">
-            <span>▦</span>
+            <LayoutDashboard size={16} strokeWidth={1.8} />
             Dashboard
           </Link>
 
           <Link to="/skills" className="sidebar-link">
-            <span>⌕</span>
+            <Search size={16} strokeWidth={1.8} />
             Browse Skills
           </Link>
 
           <Link to="/skills" className="sidebar-link">
-            <span>♡</span>
+            <Heart size={16} strokeWidth={1.8} />
             My Skills
           </Link>
 
@@ -67,29 +83,29 @@ function Layout({ children }) {
           {user?.role === "mentor" ? (
             <>
               <Link to="/incoming-requests" className="sidebar-link">
-                <span>✉</span>
+                <Mail size={16} strokeWidth={1.8} />
                 Incoming Requests
               </Link>
               <Link to="/sessions" className="sidebar-link">
-                <span>▣</span>
+                <CalendarDays size={16} strokeWidth={1.8} />
                 My Sessions
               </Link>
             </>
           ) : (
             <>
               <Link to="/requests" className="sidebar-link">
-                <span>✉</span>
+                <Mail size={16} strokeWidth={1.8} />
                 My Requests
               </Link>
               <Link to="/learning" className="sidebar-link">
-                <span>▣</span>
+                <BookOpen size={16} strokeWidth={1.8} />
                 My Learning
               </Link>
             </>
           )}
 
           <button className="sidebar-link disabled-link">
-            <span>◉</span>
+            <MessageCircle size={16} strokeWidth={1.8} />
             Messages
             <small>Soon</small>
           </button>
@@ -99,12 +115,12 @@ function Layout({ children }) {
           </div>
 
           <Link to="/profile" className="sidebar-link">
-            <span>◎</span>
+            <UserRound size={16} strokeWidth={1.8} />
             Profile
           </Link>
 
           <button className="sidebar-link disabled-link">
-            <span>⚙</span>
+            <Settings size={16} strokeWidth={1.8} />
             Settings
             <small>Soon</small>
           </button>
@@ -115,7 +131,7 @@ function Layout({ children }) {
           className="logout-link"
           onClick={handleLogout}
         >
-          <span>↪</span>
+          <LogOut size={16} strokeWidth={1.8} />
           Logout
         </button>
 
@@ -139,12 +155,12 @@ function Layout({ children }) {
 
           <div className="topbar-actions">
 
-            <button className="icon-button">
-              ♧
+            <button className="icon-button" aria-label="Notifications">
+              <Bell size={17} strokeWidth={1.8} />
             </button>
 
-            <button className="icon-button">
-              ♢
+            <button className="icon-button" aria-label="Settings">
+              <Settings size={17} strokeWidth={1.8} />
             </button>
 
             <div className="top-avatar">

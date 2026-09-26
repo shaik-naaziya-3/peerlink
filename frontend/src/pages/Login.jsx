@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { Code2, Link2 } from "lucide-react";
 import { loginUser } from "../api";
 
 function Login() {
@@ -60,7 +61,8 @@ function Login() {
       <div className="auth-brand">
 
         <Link to="/" className="auth-logo">
-          <span>♣</span> PeerLink
+          <Link2 size={22} strokeWidth={1.8} />
+          PeerLink
         </Link>
 
         <div className="auth-illustration">
@@ -166,7 +168,7 @@ function Login() {
             </button>
 
             <button type="button">
-              <span>◉</span>
+              <Code2 size={16} strokeWidth={1.8} />
               GitHub
             </button>
           </div>

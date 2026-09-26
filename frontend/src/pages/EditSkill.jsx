@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
+import { Lightbulb } from "lucide-react";
 import Layout from "../components/Layout";
 import api, { getAuthHeaders } from "../api";
 
@@ -76,7 +77,7 @@ function EditSkill() {
         <Link to="/skills" className="back-link">← Back to Skills</Link>
         <div className="form-card">
           <div className="form-card-header">
-            <div className="form-big-icon">✦</div>
+            <div className="form-big-icon"><Lightbulb size={24} strokeWidth={1.8} /></div>
             <div>
               <span className="section-label">MANAGE SKILL</span>
               <h1>Edit Skill</h1>

@@ -551,7 +551,7 @@ a {
 }
 
 .navbar .logo span:last-child,
-.footer-logo span {
+.footer-logo svg {
   color: var(--primary);
 }
 
@@ -1092,6 +1092,8 @@ footer p,
 .icon-button {
   width: 37px;
   height: 37px;
+  display: grid;
+  place-items: center;
   border: 1px solid var(--border);
   border-radius: 10px;
   background: white;
@@ -1601,7 +1603,7 @@ footer p,
   font-weight: 800;
 }
 
-.auth-logo span {
+.auth-logo svg {
   color: #a99aff;
 }
 
@@ -1861,14 +1863,6 @@ footer p,
   .logout-link {
     justify-content: center;
     font-size: 0;
-  }
-
-  .logout-link span {
-    font-size: 16px;
-  }
-
-  .sidebar-link span {
-    font-size: 16px;
   }
 
   .sidebar-link small {

@@ -1,4 +1,5 @@
 import { BrowserRouter, Routes, Route, Link, useNavigate } from "react-router-dom";
+import { GraduationCap, Handshake, Link2, Search, Sparkles, UsersRound } from "lucide-react";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Dashboard from "./pages/Dashboard";
@@ -30,7 +31,7 @@ function Home() {
       {/* NAVBAR */}
       <nav className="navbar">
         <Link to="/" className="logo">
-          <span className="logo-icon">♣</span>
+          <Link2 className="logo-icon" size={22} strokeWidth={1.8} />
           Peer<span>Link</span>
         </Link>
 
@@ -70,7 +71,8 @@ function Home() {
         <div className="hero-content">
 
           <div className="hero-badge">
-            ✦ Learn from peers • Share your skills
+            <Sparkles size={16} strokeWidth={1.8} />
+            Learn from peers • Share your skills
           </div>
 
           <h1>
@@ -190,7 +192,7 @@ function Home() {
         <div className="steps">
 
           <div className="step-card">
-            <div className="step-icon">🔎</div>
+            <div className="step-icon"><Search size={22} strokeWidth={1.8} /></div>
             <h3>Find a Skill</h3>
             <p>
               Browse skills offered by students and find something
@@ -199,7 +201,7 @@ function Home() {
           </div>
 
           <div className="step-card">
-            <div className="step-icon">🤝</div>
+            <div className="step-icon"><Handshake size={22} strokeWidth={1.8} /></div>
             <h3>Send a Request</h3>
             <p>
               Connect with a mentor and send a learning request.
@@ -207,7 +209,7 @@ function Home() {
           </div>
 
           <div className="step-card">
-            <div className="step-icon">🎓</div>
+            <div className="step-icon"><GraduationCap size={22} strokeWidth={1.8} /></div>
             <h3>Start Learning</h3>
             <p>
               Schedule a session and learn directly from your peer.
@@ -241,7 +243,7 @@ function Home() {
         </div>
 
         <div className="about-box">
-          <div className="about-icon">👥</div>
+          <div className="about-icon"><UsersRound size={22} strokeWidth={1.8} /></div>
           <h3>Student Community</h3>
           <p>
             Learn from peers, exchange knowledge and grow together.
@@ -253,7 +255,8 @@ function Home() {
       {/* FOOTER */}
       <footer>
         <div className="footer-logo">
-          <span>♣</span> PeerLink
+          <Link2 size={19} strokeWidth={1.8} />
+          PeerLink
         </div>
 
         <p>

@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
+import { Sparkles } from "lucide-react";
 import Layout from "../components/Layout";
 import api, { getAuthHeaders, getStoredUser } from "../api";
 
@@ -126,7 +127,7 @@ function Skills() {
           return (
             <article className="skill-card" key={skill._id}>
               <div className="skill-card-top">
-                <div className="skill-icon">✦</div>
+                <div className="skill-icon"><Sparkles size={22} strokeWidth={1.8} /></div>
                 <span className="skill-rating">{skill.category}</span>
               </div>
               <h3>{skill.title}</h3>
